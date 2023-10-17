@@ -3,41 +3,29 @@ import sqlite3
 db = sqlite3.connect('project.sqlite')
 cursor = db.cursor()
 
-cursor.execute('SELECT matter FROM routes')
-matters = cursor.fetchall()
 
-for i in range(len(matters)):
-    print(str(i + 1) + '.', matters[i][0])
-
-user_mtr = int(input('выбери тематику маршрута (написать его номер): '))
-mtr = matters[user_mtr - 1][0]
-print(mtr)
-
-cursor.execute(f'SELECT type FROM routes WHERE matter = "{mtr}"')
-types = cursor.fetchall()
-
-for i in range(len(types)):
-    print(str(i + 1) + '.', types[i][0])
-
-user_tp = int(input('выбери способ передвижения (написать его номер): '))
-tp = types[user_tp - 1][0]
-print(tp)
-
-db.close()
-
-
-def userChoose(col, filt=None, filt_col=None):
-    if filt is not None and filt_col is not None:
-        cursor.execute(f'SELECT "{col}" FROM routes WHERE "{filt_col}" = "{mtr}"')
-    else:
-        cursor.execute(f'SELECT "{col}" FROM routes')
+def userChoose(col1, filt1=None, filt_col1=None, filt2=None, filt_col2=None):
+    cursor.execute(f'''SELECT {col1} FROM routes WHERE "{filt_col1}" = "{(None, filt1)[filt1 is not None]}" AND 
+                    "{filt_col2}" = "{(None, filt2)[filt2 is not None]}"''')
 
     col_lst = cursor.fetchall()
 
     for i in range(len(col_lst)):
         print(str(i + 1) + '.', col_lst[i][0])
 
-    user_ans = int(input(f'выбери {col} (написать его номер): '))
+    user_ans = int(input(f'выбери {col1} (написать его номер): '))
     res = col_lst[user_ans - 1][0]
 
     return res
+
+
+matter = userChoose('matter')
+tp = userChoose('type', matter, 'matter')
+route = userChoose('name', matter, 'matter', tp, 'type')
+
+cursor.execute(f'SELECT duration FROM routes WHERE name = "{route}"')
+duration = ''.join(cursor.fetchone())
+
+print(f'\nназвание: {route}\nпродолжительность: {duration}\nсредство передвижения: {tp}\nтематика: {matter}')
+
+db.close()
