@@ -13,7 +13,7 @@ def userChoose(col1, filt1=None, filt_col1=None, filt2=None, filt_col2=None):
     for i in range(len(col_lst)):
         print(str(i + 1) + '.', col_lst[i][0])
 
-    user_ans = int(input(f'выбери {col1} (написать его номер): '))
+    user_ans = int(input(f'choose {col1} (write): '))
     res = col_lst[user_ans - 1][0]
 
     return res
@@ -29,4 +29,3 @@ duration = ''.join(cursor.fetchone())
 print(f'\nназвание: {route}\nпродолжительность: {duration}\nсредство передвижения: {tp}\nтематика: {matter}')
 
 db.close()
-
