@@ -5,8 +5,8 @@ cursor = db.cursor()
 
 
 def userChoose(col1, filt1=None, filt_col1=None, filt2=None, filt_col2=None):
-    cursor.execute(f'''SELECT {col1} FROM routes WHERE "{filt_col1}" = "{(None, filt1)[filt1 is not None]}" AND 
-                    "{filt_col2}" = "{(None, filt2)[filt2 is not None]}"''')
+    cursor.execute(f'''SELECT DISTINCT {col1} FROM routes WHERE "{filt_col1}" = "{(None, filt1)[filt1 is not None]}" 
+                    AND "{filt_col2}" = "{(None, filt2)[filt2 is not None]}"''')
 
     col_lst = cursor.fetchall()
 
