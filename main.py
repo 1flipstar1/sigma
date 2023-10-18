@@ -29,3 +29,4 @@ duration = ''.join(cursor.fetchone())
 print(f'\nназвание: {route}\nпродолжительность: {duration}\nсредство передвижения: {tp}\nтематика: {matter}')
 
 db.close()
+
