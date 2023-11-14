@@ -3,8 +3,7 @@ import pygame
 import sys
 import os
 
-api_key = '40d1649f-0493-4b70-98ba-98533de7710b'
-map_request = 'https://static-maps.yandex.ru/v1?lang=ru_RU&pl=38.423625,27.143245,38.423912,27.143015,38.424102,27.142795,38.424128,27.142795,38.424128,27.142387,38.423918,27.141909,38.423918,27.138275,38.42422&apikey=api_key'
+map_request = 'http://static-maps.yandex.ru/1.x/?pt=36.242889,54.511964,pm2ywm50~36.242638,54.510594,pm2wtm50&spn=0.002,0.002&l=map'
 
 response = requests.get(map_request)
 
@@ -21,7 +20,7 @@ with open(map_pic, 'wb') as file:
 
 pygame.init()
 
-screen = pygame.display.set_mode((301, 163))
+screen = pygame.display.set_mode((500, 350))
 screen.blit(pygame.image.load(map_pic), (0, 0))
 pygame.display.update()
 
