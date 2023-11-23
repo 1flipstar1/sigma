@@ -17,6 +17,22 @@ def get_points_by_id_from_db(id):
     res = cursor.fetchone()
     return res[0]
 
+def get_routes_info_by_type_from_db(type):
+    db = sqlite3.connect(DB_NAME)
+    cursor = db.cursor()
+    cursor.execute(f'''SELECT id, name  FROM routes WHERE type = "{type}"''')
+    res = cursor.fetchall()
+    return res
+
+def get_transport_types_from_db():
+    db = sqlite3.connect(DB_NAME)
+    cursor = db.cursor()
+    cursor.execute(f'''SELECT DISTINCT type FROM routes''')
+    res = cursor.fetchall()
+    res = [x[0] for x in res]
+    return res
+
+
 def transform_from_db_to_api(line):
     line = line.replace(', ', ',')[:-1]
     line = line.split('; ')
@@ -40,7 +56,6 @@ def get_map(points):
         print('Http статус:', response.status_code, '(', response.reason, ')')
         return False
     return response.content
-
 
 
 
