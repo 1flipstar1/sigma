@@ -17,8 +17,7 @@ def get_points_by_id_from_db(id):
     res = cursor.fetchone()
     return res[0]
 
-def transform_from_dp_to_api(line):
-    print(line)
+def transform_from_db_to_api(line):
     line = line.replace(', ', ',')[:-1]
     line = line.split('; ')
     line = map(lambda x: x[2:], line)
@@ -48,8 +47,7 @@ def get_map(points):
 print('input number')
 n = int(input())
 screen = pygame.display.set_mode((640, 450))
-points = transform_from_dp_to_api(get_points_by_id_from_db(n))
-print(points)
+points = transform_from_db_to_api(get_points_by_id_from_db(n))
 map_content = get_map(points)
 if not map_content:
     sys.exit(-1)
