@@ -10,12 +10,24 @@ MAP_FILE_NAME = 'map.png'
 pygame.init()
 
 
+
+
+
+
 def get_points_by_id_from_db(id):
     db = sqlite3.connect(DB_NAME)
     cursor = db.cursor()
     cursor.execute(f'''SELECT rout FROM routes WHERE id = {id}''')
     res = cursor.fetchone()
     return res[0]
+
+def get_matters_from_db():
+    db = sqlite3.connect(DB_NAME)
+    cursor = db.cursor()
+    cursor.execute(f'''SELECT DISTINCT matter FROM routes''')
+    res = cursor.fetchall()
+    res = [x[0] for x in res]
+    return res
 
 def get_routes_info_by_type_from_db(type):
     db = sqlite3.connect(DB_NAME)
@@ -24,10 +36,10 @@ def get_routes_info_by_type_from_db(type):
     res = cursor.fetchall()
     return res
 
-def get_transport_types_from_db():
+def get_transport_types_from_db(matter):
     db = sqlite3.connect(DB_NAME)
     cursor = db.cursor()
-    cursor.execute(f'''SELECT DISTINCT type FROM routes''')
+    cursor.execute(f'''SELECT DISTINCT type FROM routes WHERE matter = "{matter}"''')
     res = cursor.fetchall()
     res = [x[0] for x in res]
     return res
@@ -47,7 +59,7 @@ def get_map(points):
     params = {
         "l": "map",
         'size': '640,450',
-        'z': '12',
+        'z': '14',
         'pt': points
     }
     response = requests.get(api_server, params=params)
@@ -59,8 +71,18 @@ def get_map(points):
 
 
 
-print('input number')
-n = int(input())
+print('Здравствуйте, вас привествует первый путеводитель по Калуге')
+print('Выберите тематику')
+print(*get_matters_from_db())
+matter = input()
+print('Выберите тип передвижения')
+print(*get_transport_types_from_db(matter))
+type = input()
+print('Вот варианты маршрутов. Выберите номер')
+res = get_routes_info_by_type_from_db(type)
+for i in res:
+    print(*i)
+n = input()
 screen = pygame.display.set_mode((640, 450))
 points = transform_from_db_to_api(get_points_by_id_from_db(n))
 map_content = get_map(points)
