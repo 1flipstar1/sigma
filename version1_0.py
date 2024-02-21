@@ -30,6 +30,13 @@ def get_routes_info_by_type_from_db(type):
     res = cursor.fetchall()
     return res
 
+def get_info_by_type_from_db(type):
+    db = sqlite3.connect(DB_NAME)
+    cursor = db.cursor()
+    cursor.execute(f'''SELECT id, name  FROM routes WHERE type = "{type}"''')
+    res = cursor.fetchall()
+    return res
+
 def get_transport_types_from_db(matter):
     db = sqlite3.connect(DB_NAME)
     cursor = db.cursor()
