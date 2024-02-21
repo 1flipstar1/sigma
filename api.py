@@ -14,7 +14,7 @@ def transform_from_dp_to_api(line):
     return line
 
 
-def get_map(points):
+def get_map(points, z=15):
     # map_request = 'http://static-maps.yandex.ru/1.x/?pt=36.242889,54.511964,pm2ywm50~36.242638,54.510594,pm2wtm50&spn=0.002,0.002&l=map'
     api_server = 'http://static-maps.yandex.ru/1.x/'
     params = {
@@ -22,7 +22,7 @@ def get_map(points):
         #"spn": "0.002,0.002",
         "l": "map",
         'size': '640,450',
-        'z': '15',
+        'z': z,
         'pt': points
     }
     response = requests.get(api_server, params=params)

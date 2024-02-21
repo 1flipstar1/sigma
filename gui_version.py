@@ -10,12 +10,16 @@ class Window(QMainWindow, Ui_MainWindow):
     def __init__(self):
         QMainWindow.__init__(self)
         self.setupUi(self)
+        self.points = []
         self.types = get_transport_types_from_db()
         self.transport_combo_box.addItems(self.types)
         self.matters = get_matter_from_db()
         self.matter_combo_box.addItems(self.matters)
         self.get_routes_button.clicked.connect(self.print_info)
-        self.draw_route_button.clicked.connect((self.print_image))
+        self.draw_route_button.clicked.connect(self.print_image)
+        self.scale_Slider.setMaximum(20)
+        self.scale_Slider.setMinimum(10)
+        self.scale_Slider.valueChanged.connect(self.update_map)
 
     def print_info(self):
         t = self.transport_combo_box.currentText()
@@ -36,15 +40,22 @@ class Window(QMainWindow, Ui_MainWindow):
             return
         d = d.text().split('; ')[0]
         this_id = self.find_id(d)
-        points = get_points_by_id_from_db(this_id)
-        points = transform_from_dp_to_api(points)
-        print(points)
-        picture = get_map(points)
+        self.points = get_points_by_id_from_db(this_id)
+        self.points = transform_from_dp_to_api(self.points)
+        picture = get_map(self.points)
         pixmap = QPixmap()
         pixmap.loadFromData(picture)
         self.label_4.setPixmap(pixmap)
         self.update()
 
+    def update_map(self):
+        print('кря')
+        x = self.scale_Slider.value()
+        picture = get_map(self.points, z=x)
+        pixmap = QPixmap()
+        pixmap.loadFromData(picture)
+        self.label_4.setPixmap(pixmap)
+        self.update()
 
 def except_hook(cls, exception, traceback):
     sys.__excepthook__(cls, exception, traceback)
