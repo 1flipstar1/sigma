@@ -49,7 +49,6 @@ class Window(QMainWindow, Ui_MainWindow):
         self.update()
 
     def update_map(self):
-        print('кря')
         x = self.scale_Slider.value()
         picture = get_map(self.points, z=x)
         pixmap = QPixmap()
