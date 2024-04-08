@@ -7,7 +7,7 @@ import os
 def transform_from_dp_to_api(line):
     line = line.replace(', ', ',')[:-1]
     line = line.split('; ')
-    line = map(lambda x: x[2:], line)
+    line = map(lambda x: x[(x.find(':')+1):], line)
     line = map(lambda x: [x.split(',')[1], x.split(',')[0], 'flag'], line)
     line = map(lambda x: ','.join(x), line)
     line = '~'.join(line)
