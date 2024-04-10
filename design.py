@@ -1,9 +1,8 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 
-
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
-        MainWindow.setObjectName("MainWindow")
+        MainWindow.setObjectName("Велосипед Циолковского")
         MainWindow.resize(800, 600)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
@@ -29,6 +28,7 @@ class Ui_MainWindow(object):
         self.verticalLayout.addWidget(self.label_2)
         self.transport_combo_box = QtWidgets.QComboBox(self.verticalLayoutWidget)
         self.transport_combo_box.setObjectName("transport_combo_box")
+        self.transport_combo_box.setStyleSheet('background-color: #FFD700;')
         self.verticalLayout.addWidget(self.transport_combo_box)
         self.label_3 = QtWidgets.QLabel(self.verticalLayoutWidget)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Fixed)
@@ -41,9 +41,11 @@ class Ui_MainWindow(object):
         self.verticalLayout.addWidget(self.label_3)
         self.matter_combo_box = QtWidgets.QComboBox(self.verticalLayoutWidget)
         self.matter_combo_box.setObjectName("matter_combo_box")
+        self.matter_combo_box.setStyleSheet('background-color: #FFD700;')
         self.verticalLayout.addWidget(self.matter_combo_box)
         self.get_routes_button = QtWidgets.QPushButton(self.verticalLayoutWidget)
         self.get_routes_button.setObjectName("get_routes_button")
+        self.get_routes_button.setStyleSheet('background-color: #FFD700;')
         self.verticalLayout.addWidget(self.get_routes_button)
         self.verticalLayoutWidget_2 = QtWidgets.QWidget(self.centralwidget)
         self.verticalLayoutWidget_2.setGeometry(QtCore.QRect(210, 20, 541, 371))
@@ -56,6 +58,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_2.addWidget(self.label_4)
         self.draw_route_button = QtWidgets.QPushButton(self.verticalLayoutWidget_2)
         self.draw_route_button.setObjectName("draw_route_button")
+        self.draw_route_button.setStyleSheet('background-color: #FFD700;')
         self.verticalLayout_2.addWidget(self.draw_route_button)
         self.scale_Slider = QtWidgets.QSlider(self.centralwidget)
         self.scale_Slider.setGeometry(QtCore.QRect(760, 20, 22, 381))
@@ -91,10 +94,10 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.label_2.setText(_translate("MainWindow", "Вид транспорта"))
-        self.label_3.setText(_translate("MainWindow", "Тематика"))
+        MainWindow.setWindowTitle('Велосипед Циолковского')
+        self.label_2.setText(_translate("MainWindow", "'Вид транспорта'"))
+        self.label_3.setText(_translate("MainWindow", "'Тематика'"))
         self.get_routes_button.setText(_translate("MainWindow", "Получить маршруты"))
         self.label_4.setText(_translate("MainWindow", "TextLabel"))
         self.draw_route_button.setText(_translate("MainWindow", "Отобразить маршрут"))
-        self.label.setText(_translate("MainWindow", "Выбор параметров"))
+        self.label.setText(_translate("MainWindow", "'Выбор параметров'"))
