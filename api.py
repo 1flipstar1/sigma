@@ -31,7 +31,6 @@ def get_map_static(points, z=12):
         'z': z,
         'pt': points
     }
-    print(params)
     response = requests.get(api_server, params=params)
 
     if not response:

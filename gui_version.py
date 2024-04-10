@@ -20,8 +20,8 @@ class Window(QMainWindow, Ui_MainWindow):
         self.matter_combo_box.addItems(self.matters)
         self.get_routes_button.clicked.connect(self.print_info)
         self.draw_route_button.clicked.connect(self.print_image)
-        self.scale_Slider.setMaximum(20)
-        self.scale_Slider.setMinimum(10)
+        self.scale_Slider.setMaximum(18)
+        self.scale_Slider.setMinimum(12)
         self.scale_Slider.valueChanged.connect(self.update_map)
 
     def print_info(self):
