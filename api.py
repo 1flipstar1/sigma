@@ -5,8 +5,8 @@ import os
 def transform_for_points(line):
     line = line.replace(', ', ',')[:-1]
     line = line.split('; ')
-    line = map(lambda x: x[x.find(':')+1:], line)
-    line = map(lambda x: [x.split(',')[1], x.split(',')[0], 'flag'], line)
+    line1 = list(map(lambda x: x[x.find(':')+1:], line))
+    line = map(lambda x: [x.split(',')[1], x.split(',')[0], f'pm2rdm{line1.index(x) + 1}'], line1)
     line = map(lambda x: ','.join(x), line)
     line = '~'.join(line)
     return line
