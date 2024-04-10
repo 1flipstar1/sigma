@@ -10,6 +10,9 @@ class Window(QMainWindow, Ui_MainWindow):
     def __init__(self):
         QMainWindow.__init__(self)
         self.setupUi(self)
+        self.setStyleSheet('background-color: #FFC0CB;')
+        pixmap = QPixmap('Калуга.jpg')
+        self.label_4.setPixmap(pixmap)
         self.points = []
         self.types = get_transport_types_from_db()
         self.transport_combo_box.addItems(self.types)
@@ -41,8 +44,8 @@ class Window(QMainWindow, Ui_MainWindow):
         d = d.text().split('; ')[0]
         this_id = self.find_id(d)
         self.points = get_points_by_id_from_db(this_id)
-        self.points = transform_from_dp_to_api(self.points)
-        picture = get_map(self.points)
+        self.points = transform_for_points(self.points)
+        picture = get_map_static(self.points)
         pixmap = QPixmap()
         pixmap.loadFromData(picture)
         self.label_4.setPixmap(pixmap)
@@ -50,7 +53,7 @@ class Window(QMainWindow, Ui_MainWindow):
 
     def update_map(self):
         x = self.scale_Slider.value()
-        picture = get_map(self.points, z=x)
+        picture = get_map_static(self.points, z=x)
         pixmap = QPixmap()
         pixmap.loadFromData(picture)
         self.label_4.setPixmap(pixmap)
