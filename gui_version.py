@@ -5,14 +5,23 @@ from PyQt5.QtWidgets import QApplication, QMainWindow
 from PyQt5.Qt import QPixmap
 import sys
 
+bgcolor = '#55A62A'
+# - зеленый
+color = '#FF9540'
 
 class Window(QMainWindow, Ui_MainWindow):
     def __init__(self):
         QMainWindow.__init__(self)
         self.setupUi(self)
-        self.setStyleSheet('background-color: #FFC0CB;')
+        #self.showMaximized()
+        self.setStyleSheet(f'background-color: {bgcolor};')
+        self.draw_route_button.setStyleSheet(f'background-color: {color}')
+        self.get_routes_button.setStyleSheet(f'background-color: {color};')
+        self.matter_combo_box.setStyleSheet(f'background-color: {color};')
+        self.transport_combo_box.setStyleSheet(f'background-color: {color};')
         pixmap = QPixmap('Калуга.jpg')
         self.label_4.setPixmap(pixmap)
+        self.label_4.setScaledContents(True)
         self.points = []
         self.types = get_transport_types_from_db()
         self.transport_combo_box.addItems(self.types)
